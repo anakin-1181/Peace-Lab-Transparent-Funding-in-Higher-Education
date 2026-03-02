@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Modal } from '../components/Modal';
 import { PieChart } from '../components/PieChart';
 import { SankeyChart } from '../components/SankeyChart';
+import { ChatWidget } from '../components/ChatWidget';
 import { ErrorView, LoadingView } from '../components/StateViews';
 import { useDashboardData } from '../data/useDashboardData';
 import {
@@ -87,6 +88,8 @@ export function OverviewPage() {
           <p>{pct(researchShare)}</p>
         </article>
       </section>
+
+      <ChatWidget data={data} />
 
       <SankeyChart
         title="UCL Income to Expenditure Flow"

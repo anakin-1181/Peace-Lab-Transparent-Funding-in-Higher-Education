@@ -8,3 +8,6 @@ public/ucl-data.json
 data
 *.csv
 Data/
+dashboard/.env
+dashboard/.env.local
+dashboard/.env.*.local

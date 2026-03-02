@@ -1,47 +1,52 @@
 # Peace Lab - UCL Transparent Funding
 
-A production-oriented interactive dashboard that visualizes University College London (UCL) finance data using official HESA finance tables.
+An interactive transparency dashboard for University College London (UCL) finance data, built from official HESA finance tables.
 
-## Overview
+## What This Dashboard Does
 
-This project presents transparent, drill-down finance views for UCL using:
+- Visualizes UCL income and expenditure flows with a main Sankey chart (Table 1).
+- Supports drill-down exploration for:
+  - tuition fee composition (Table 6),
+  - research income sources (Table 5),
+  - expenditure structure (Table 8).
+- Provides a department analysis page with:
+  - all-department comparison (pie + ranking bar),
+  - single-department detailed Sankey flow.
+- Includes a data assistant chat widget that:
+  - answers questions grounded in loaded UCL data,
+  - answers data-reference questions (for example, “What is HESA?”),
+  - applies inappropriate-term masking/redaction before model processing.
 
-- **Table 1**: Consolidated income and expenditure flow
-- **Table 5**: Research grants and contracts by source and cost centre
-- **Table 6**: Tuition fees and education contracts breakdown
-- **Table 8**: Expenditure breakdown by activity
+## Data Background
 
-The dashboard is built as a React + TypeScript app with charting powered by ECharts.
+### What Is HESA?
 
-## Data Source
+**HESA (Higher Education Statistics Agency)** is the UK authority for higher education data and analysis.
 
-Data comes from **HESA (Higher Education Statistics Agency)** finance releases:
+- Finance portal: https://www.hesa.ac.uk/data-and-analysis/finances
 
-- Portal: https://www.hesa.ac.uk/data-and-analysis/finances
+### Data Scope Used in This Dashboard
 
-This project filters to:
+- Provider: **University College London (UCL)**
+- UKPRN: **10007784**
+- Units: values are shown in **£000s** (as reported in source files)
+- Tables used:
+  - **Table 1**: Consolidated statement of comprehensive income and expenditure
+  - **Table 5**: Research grants and contracts by source and HESA cost centre
+  - **Table 6**: Tuition fees and education contracts
+  - **Table 8**: Expenditure breakdown by activity and cost centre
 
-- **Provider**: University College London
-- **UKPRN**: `10007784`
+### Data Integrity Notes
 
-All chart values are displayed in **£000s** as provided in source files.
-
-## Key Features
-
-- Modern multi-page dashboard UI
-- Main Sankey flow for income and expenditure (Table 1)
-- Click-based modal drill-downs on overview charts
-- Department comparison page with:
-  - all-department pie share
-  - all-department bar ranking
-  - single-department detailed Sankey
-- Data Reference page documenting tables, columns, caveats, and official links
-
-
-
-## Important Data Notes
-
-- Table 5 supports multi-year UCL analysis in the provided data (2015/16 to 2023/24).
-- Tables 1, 6, and 8 contain a single UCL row in the current provided files (2023/24).
 - Dashboard values are shown directly from provided datasets; no synthetic extrapolation is used.
+- Table 5 supports multi-year analysis in the included files.
+- In the current provided files, Tables 1, 6, and 8 are represented by the latest UCL reporting row.
+- HESA restatements/caveats are documented in the in-app **Data Reference** page.
 
+## Use The Web App
+
+Use the deployed **Peace Lab - UCL Transparent Funding** web app to explore the dashboard interactively.
+
+- Start on **Overview** for high-level funding flow.
+- Move to **Departments** for cross-department comparison and deep dives.
+- Open **Data Reference** to understand table definitions, columns, and caveats.

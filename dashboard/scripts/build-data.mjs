@@ -341,7 +341,18 @@ async function parseTable5() {
 
 async function run() {
   if (!fs.existsSync(SOURCE_DIR)) {
-    throw new Error(`Data directory not found: ${SOURCE_DIR}`);
+    if (fs.existsSync(OUT_FILE)) {
+      console.warn(
+        `[build:data] Data directory not found (${SOURCE_DIR}). ` +
+          `Using existing prebuilt dataset at ${OUT_FILE}.`
+      );
+      return;
+    }
+
+    throw new Error(
+      `Data directory not found: ${SOURCE_DIR}. ` +
+        `No prebuilt dataset found at ${OUT_FILE}.`
+    );
   }
 
   const table1 = await parseSingleRowTable(path.join(SOURCE_DIR, 'Table 1 - Consolidated statement of comprehensive income and expenditure 2015:16 to 2024:25.csv'), [

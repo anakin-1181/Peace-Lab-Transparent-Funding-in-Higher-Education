@@ -4,6 +4,7 @@ dist/
 *.log
 .DS_Store
 public/ucl-data.json
+!dashboard/public/ucl-data.json
 data
 *.csv
 Data/

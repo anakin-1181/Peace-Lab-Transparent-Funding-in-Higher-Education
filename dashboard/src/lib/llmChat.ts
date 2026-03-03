@@ -41,6 +41,7 @@ async function safeReadJson(response: Response): Promise<ChatApiResponse> {
 
 function compactDataContext(data: DashboardData) {
   const maxDepartmentContext = 40;
+  const latestOverviewYear = data.table1.years[data.table1.years.length - 1] ?? null;
   const latestYear = data.table5.years[data.table5.years.length - 1];
   const latestRows = latestYear ? data.table5.byYear[latestYear]?.departments ?? [] : [];
   const ranked = [...latestRows]
@@ -68,9 +69,19 @@ function compactDataContext(data: DashboardData) {
         columns: table.columns.map(([column]) => column)
       }))
     },
-    table1: data.table1,
-    table6: data.table6,
-    table8: data.table8,
+    table1: {
+      years: data.table1.years,
+      latestYear: latestOverviewYear,
+      byYear: data.table1.byYear
+    },
+    table6: {
+      years: data.table6.years,
+      byYear: data.table6.byYear
+    },
+    table8: {
+      years: data.table8.years,
+      byYear: data.table8.byYear
+    },
     table5: {
       latestYear: latestYear ?? null,
       years: data.table5.years,

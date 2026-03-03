@@ -20,7 +20,7 @@ export const DATA_REFERENCE_TABLES: DataReferenceTable[] = [
     id: 'table1',
     title: 'Table 1 - Consolidated Statement of Comprehensive Income and Expenditure',
     link: 'https://www.hesa.ac.uk/data-and-analysis/finances/table-1',
-    file: 'Data/Table 1 - Consolidated statement of comprehensive income and expenditure 2015:16 to 2024:25.csv',
+    file: 'Data/table-1.csv',
     purpose: 'Primary overview flow used in the main Sankey chart (income to expenditure).',
     hesaNotes: [
       'Prior-year values can be restated in latest submissions; this may cause differences versus corresponding values in Tables 5, 7, 8 and 14.',
@@ -33,27 +33,19 @@ export const DATA_REFERENCE_TABLES: DataReferenceTable[] = [
     columns: [
       ['UKPRN', 'Provider identifier.'],
       ['HE Provider', 'Provider name.'],
+      ['Academic year', 'Academic year label.'],
       ['Financial Year End', 'Financial year-end date.'],
-      ['Tuition fees and education contracts', 'Income from tuition and education contracts (£000s).'],
-      ['Funding body grants', 'Income from funding bodies (£000s).'],
-      ['Research grants and contracts', 'Income from research grants/contracts (£000s).'],
-      ['Other income', 'Other operating income (£000s).'],
-      ['Investment income', 'Investment-related income (£000s).'],
-      ['Donations and endowments', 'Donation/endowment income (£000s).'],
-      ['Total income', 'Total income (£000s).'],
-      ['Staff costs', 'Staff expenditure (£000s).'],
-      ['Restructuring costs', 'Restructuring expenditure (£000s).'],
-      ['Other operating expenses', 'Other operating expenditure (£000s).'],
-      ['Depreciation and amortisation', 'Depreciation/amortisation expenditure (£000s).'],
-      ['Interest and other finance costs', 'Finance cost expenditure (£000s).'],
-      ['Total expenditure', 'Total expenditure (£000s).']
+      ['Category marker', 'Top-level line group (for example Income or Expenditure).'],
+      ['Category', 'Detailed line item within marker (for example Total income).'],
+      ['Year End Month', 'Month/aggregation marker (All used for dashboard totals).'],
+      ['Value(£000s)', 'Reported value in £000s.']
     ]
   },
   {
     id: 'table6',
     title: 'Table 6 - Tuition Fees and Education Contracts',
     link: 'https://www.hesa.ac.uk/data-and-analysis/finances/table-6',
-    file: 'Data/T6.csv',
+    file: 'Data/table-6/t6_YYYYYY.csv',
     purpose: 'Tuition drill-down chart in the overview page.',
     hesaNotes: [
       'Contains tuition fees and education contracts analysed by domicile, mode, level and source of funding.',
@@ -84,7 +76,7 @@ export const DATA_REFERENCE_TABLES: DataReferenceTable[] = [
     id: 'table5',
     title: 'Table 5 - Research Grants and Contracts by Source and Cost Centre',
     link: 'https://www.hesa.ac.uk/data-and-analysis/finances/table-5',
-    file: 'Data/table-5 (1)/table-5-(YYYY-YY).csv',
+    file: 'Data/table-5/table-5-(YYYY-YY).csv',
     purpose: 'Research source drill-down and department-level analysis/ranking.',
     hesaNotes: [
       'Shows research grants/contracts income at granular level by funding source and HESA cost centre.',
@@ -110,7 +102,7 @@ export const DATA_REFERENCE_TABLES: DataReferenceTable[] = [
     id: 'table8',
     title: 'Table 8 - Expenditure Breakdown by Activity and Cost Centre',
     link: 'https://www.hesa.ac.uk/data-and-analysis/finances/table-8',
-    file: 'Data/Table 8 - Expenditure - breakdown by HE provider, activity, HESA cost centre and academic year 2015:16 to 2024:25.csv',
+    file: 'Data/table-8/table-8-(YYYY-YY).csv',
     purpose: 'Expenditure drill-down chart in the overview page.',
     hesaNotes: [
       'Table 8 values come from the corresponding collection year and may not match Table 1 restated totals.',
@@ -122,16 +114,14 @@ export const DATA_REFERENCE_TABLES: DataReferenceTable[] = [
     ],
     columns: [
       ['UKPRN', 'Provider identifier.'],
-      ['HE Provider', 'Provider name.'],
-      ['Financial Year End', 'Financial year-end date.'],
-      ['Academic staff costs', 'Academic staff expenditure (£000s).'],
-      ['Other staff costs', 'Other staff expenditure (£000s).'],
-      ['Total staff costs', 'Total staff expenditure (£000s).'],
-      ['Restructuring costs', 'Restructuring expenditure (£000s).'],
-      ['Other operating expenses', 'Other operating expenditure (£000s).'],
-      ['Depreciation and amortisation', 'Depreciation/amortisation expenditure (£000s).'],
-      ['Interest and other finance costs', 'Finance cost expenditure (£000s).'],
-      ['Total expenditure', 'Total expenditure (£000s).']
+      ['HE provider', 'Provider name.'],
+      ['Academic year', 'Academic year label.'],
+      ['Financial year end', 'Financial year-end date.'],
+      ['HESA cost centre', 'Cost centre grouping.'],
+      ['Academic departments', 'Cost centre detail row label.'],
+      ['Activity', 'Expenditure activity category.'],
+      ['Year End Month', 'Month/aggregation marker (All used for dashboard totals).'],
+      ['Value(£000s)', 'Reported value in £000s.']
     ]
   }
 ];

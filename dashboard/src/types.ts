@@ -16,6 +16,61 @@ export type Table5YearData = {
   departments: DepartmentBreakdown[];
 };
 
+export type Table1YearData = {
+  ukprn: string;
+  provider: string;
+  financialYearEnd: string;
+  academicYear: string;
+  tuitionFeesAndEducationContracts: number;
+  fundingBodyGrants: number;
+  researchGrantsAndContracts: number;
+  otherIncome: number;
+  investmentIncome: number;
+  donationsAndEndowments: number;
+  totalIncome: number;
+  staffCosts: number;
+  restructuringCosts: number;
+  otherOperatingExpenses: number;
+  depreciationAndAmortisation: number;
+  interestAndOtherFinanceCosts: number;
+  totalExpenditure: number;
+};
+
+export type Table6YearData = {
+  ukprn: string;
+  provider: string;
+  financialYearEnd: string;
+  academicYear: string;
+  totalHomeFees: number;
+  totalRestOfUkFees: number;
+  totalUkFees: number;
+  totalEuFees: number;
+  totalUkAndEuFees: number;
+  totalNonEuFees: number;
+  totalNonUkFees: number;
+  totalHeCourseFees: number;
+  totalResearchTrainingSupportGrants: number;
+  nonCreditBearingCourseFees: number;
+  feCourseFees: number;
+  totalTuitionFeesAndEducationContracts: number;
+  contractedOutActivityFeeIncome: number;
+};
+
+export type Table8YearData = {
+  ukprn: string;
+  provider: string;
+  financialYearEnd: string;
+  academicYear: string;
+  academicStaffCosts: number;
+  otherStaffCosts: number;
+  totalStaffCosts: number;
+  restructuringCosts: number;
+  otherOperatingExpenses: number;
+  depreciationAndAmortisation: number;
+  interestAndOtherFinanceCosts: number;
+  totalExpenditure: number;
+};
+
 export type DashboardData = {
   generatedAt: string;
   provider: {
@@ -27,56 +82,16 @@ export type DashboardData = {
     overviewMethod: string;
   };
   table1: {
-    ukprn: string;
-    provider: string;
-    financialYearEnd: string;
-    academicYear: string;
-    tuitionFeesAndEducationContracts: number;
-    fundingBodyGrants: number;
-    researchGrantsAndContracts: number;
-    otherIncome: number;
-    investmentIncome: number;
-    donationsAndEndowments: number;
-    totalIncome: number;
-    staffCosts: number;
-    restructuringCosts: number;
-    otherOperatingExpenses: number;
-    depreciationAndAmortisation: number;
-    interestAndOtherFinanceCosts: number;
-    totalExpenditure: number;
+    years: string[];
+    byYear: Record<string, Table1YearData>;
   };
   table6: {
-    ukprn: string;
-    provider: string;
-    financialYearEnd: string;
-    academicYear: string;
-    totalHomeFees: number;
-    totalRestOfUkFees: number;
-    totalUkFees: number;
-    totalEuFees: number;
-    totalUkAndEuFees: number;
-    totalNonEuFees: number;
-    totalNonUkFees: number;
-    totalHeCourseFees: number;
-    totalResearchTrainingSupportGrants: number;
-    nonCreditBearingCourseFees: number;
-    feCourseFees: number;
-    totalTuitionFeesAndEducationContracts: number;
-    contractedOutActivityFeeIncome: number;
+    years: string[];
+    byYear: Record<string, Table6YearData>;
   };
   table8: {
-    ukprn: string;
-    provider: string;
-    financialYearEnd: string;
-    academicYear: string;
-    academicStaffCosts: number;
-    otherStaffCosts: number;
-    totalStaffCosts: number;
-    restructuringCosts: number;
-    otherOperatingExpenses: number;
-    depreciationAndAmortisation: number;
-    interestAndOtherFinanceCosts: number;
-    totalExpenditure: number;
+    years: string[];
+    byYear: Record<string, Table8YearData>;
   };
   table5: {
     years: string[];

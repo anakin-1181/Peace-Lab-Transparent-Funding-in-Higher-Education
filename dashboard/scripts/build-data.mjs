@@ -8,8 +8,18 @@ const __dirname = path.dirname(__filename);
 
 const ROOT = path.resolve(__dirname, '..');
 const SOURCE_DIR = path.resolve(ROOT, '..', 'Data');
-const TABLE5_DIR = path.join(SOURCE_DIR, 'table-5 (1)');
 const OUT_FILE = path.join(ROOT, 'public', 'ucl-data.json');
+
+const TABLE1_FILE_CANDIDATES = [
+  'table-1.csv',
+  'Table 1 - Consolidated statement of comprehensive income and expenditure 2015:16 to 2024:25.csv'
+];
+const TABLE5_DIR_CANDIDATES = ['table-5', 'table-5 (1)'];
+const TABLE6_DIR_CANDIDATES = ['table-6'];
+const TABLE8_DIR_CANDIDATES = [
+  'table-8',
+  'Table 8 - Expenditure - breakdown by HE provider, activity, HESA cost centre and academic year 2015:16 to 2024:25.csv'
+];
 
 const UCL_UKPRN = '10007784';
 const UCL_NAME = 'University College London';
@@ -28,6 +38,33 @@ const SOURCE_GROUP_ALIASES = {
   '12': 'Non-EU Charities (Open)',
   '13': 'Non-EU Industry & Commerce',
   '14': 'Non-EU Other Sources'
+};
+
+const TABLE1_FIELD_MAP = {
+  'Income|Tuition fees and education contracts': 'tuitionFeesAndEducationContracts',
+  'Income|Funding body grants': 'fundingBodyGrants',
+  'Income|Research grants and contracts': 'researchGrantsAndContracts',
+  'Income|Other income': 'otherIncome',
+  'Income|Investment income': 'investmentIncome',
+  'Income|Donations and endowments': 'donationsAndEndowments',
+  'Income|Total income': 'totalIncome',
+  'Expenditure|Staff costs': 'staffCosts',
+  'Expenditure|Restructuring costs': 'restructuringCosts',
+  'Expenditure|Other operating expenses': 'otherOperatingExpenses',
+  'Expenditure|Depreciation and amortisation': 'depreciationAndAmortisation',
+  'Expenditure|Interest and other finance costs': 'interestAndOtherFinanceCosts',
+  'Expenditure|Total expenditure': 'totalExpenditure'
+};
+
+const TABLE8_ACTIVITY_MAP = {
+  'Academic staff costs': 'academicStaffCosts',
+  'Other staff costs': 'otherStaffCosts',
+  'Total staff costs': 'totalStaffCosts',
+  'Restructuring costs': 'restructuringCosts',
+  'Other operating expenses': 'otherOperatingExpenses',
+  'Depreciation and amortisation': 'depreciationAndAmortisation',
+  'Interest and other finance costs': 'interestAndOtherFinanceCosts',
+  'Total expenditure': 'totalExpenditure'
 };
 
 function stripBom(value) {
@@ -77,7 +114,7 @@ function toNumber(raw) {
   }
 
   const negative = value.startsWith('(') && value.endsWith(')');
-  const stripped = value.replace(/[(),\s]/g, '').replace(/,/g, '');
+  const stripped = value.replace(/[(),\s]/g, '');
   const parsed = Number(stripped);
 
   if (!Number.isFinite(parsed)) {
@@ -91,12 +128,33 @@ function academicYearFromDate(financialYearEnd) {
   const value = cleanCell(financialYearEnd);
   const year = Number(value.slice(0, 4));
   if (!Number.isFinite(year) || year < 2000) {
-    return '2023/24';
+    return '';
   }
 
   const start = year - 1;
   const end2 = String(year).slice(2);
   return `${start}/${end2}`;
+}
+
+function academicYearFromFilename(fileName) {
+  const name = cleanCell(fileName).toLowerCase();
+
+  const long = name.match(/(20\d{2})[-/](\d{2})/);
+  if (long) {
+    return `${long[1]}/${long[2]}`;
+  }
+
+  const short = name.match(/_(\d{2})(\d{2})\.csv$/);
+  if (short) {
+    const startYear = 2000 + Number(short[1]);
+    return `${startYear}/${short[2]}`;
+  }
+
+  return '';
+}
+
+function yearSort(a, b) {
+  return Number(a.slice(0, 4)) - Number(b.slice(0, 4));
 }
 
 async function walkCsvRows(filePath, onRow) {
@@ -131,6 +189,22 @@ function get(row, idx, key) {
     return '';
   }
   return row[i] ?? '';
+}
+
+function getAny(row, idx, keys) {
+  for (const key of keys) {
+    const value = get(row, idx, key);
+    if (cleanCell(value) !== '') {
+      return value;
+    }
+  }
+  return '';
+}
+
+function ensureYearMapRows(yearsMap) {
+  const years = [...yearsMap.keys()].sort(yearSort);
+  const byYear = Object.fromEntries(years.map((year) => [year, yearsMap.get(year)]));
+  return { years, byYear };
 }
 
 function sourceCode(sourceName) {
@@ -178,51 +252,336 @@ function sortedEntries(map) {
     .sort((a, b) => b.value - a.value);
 }
 
-async function parseSingleRowTable(filePath, numericFields) {
-  let rowData = null;
+function createTable1YearRow({ ukprn, provider, financialYearEnd, academicYear }) {
+  return {
+    ukprn,
+    provider,
+    financialYearEnd,
+    academicYear,
+    tuitionFeesAndEducationContracts: 0,
+    fundingBodyGrants: 0,
+    researchGrantsAndContracts: 0,
+    otherIncome: 0,
+    investmentIncome: 0,
+    donationsAndEndowments: 0,
+    totalIncome: 0,
+    staffCosts: 0,
+    restructuringCosts: 0,
+    otherOperatingExpenses: 0,
+    depreciationAndAmortisation: 0,
+    interestAndOtherFinanceCosts: 0,
+    totalExpenditure: 0
+  };
+}
+
+function createTable8YearRow({ ukprn, provider, financialYearEnd, academicYear }) {
+  return {
+    ukprn,
+    provider,
+    financialYearEnd,
+    academicYear,
+    academicStaffCosts: 0,
+    otherStaffCosts: 0,
+    totalStaffCosts: 0,
+    restructuringCosts: 0,
+    otherOperatingExpenses: 0,
+    depreciationAndAmortisation: 0,
+    interestAndOtherFinanceCosts: 0,
+    totalExpenditure: 0
+  };
+}
+
+function resolveExistingFile(baseDir, candidates) {
+  for (const candidate of candidates) {
+    const fullPath = path.join(baseDir, candidate);
+    if (fs.existsSync(fullPath) && fs.statSync(fullPath).isFile()) {
+      return fullPath;
+    }
+  }
+  throw new Error(`No expected file found in ${baseDir}. Tried: ${candidates.join(', ')}`);
+}
+
+function resolveExistingDir(baseDir, candidates) {
+  for (const candidate of candidates) {
+    const fullPath = path.join(baseDir, candidate);
+    if (fs.existsSync(fullPath) && fs.statSync(fullPath).isDirectory()) {
+      return fullPath;
+    }
+  }
+  throw new Error(`No expected directory found in ${baseDir}. Tried: ${candidates.join(', ')}`);
+}
+
+async function parseTable1() {
+  const filePath = resolveExistingFile(SOURCE_DIR, TABLE1_FILE_CANDIDATES);
+  const byYear = new Map();
 
   await walkCsvRows(filePath, (row, idx) => {
     const ukprn = get(row, idx, 'UKPRN');
-    const provider = get(row, idx, 'HE Provider') || get(row, idx, 'HE provider');
+    const provider = getAny(row, idx, ['HE Provider', 'HE provider']);
 
     if (ukprn !== UCL_UKPRN && provider !== UCL_NAME) {
       return;
     }
 
-    const out = {
-      ukprn,
-      provider,
-      financialYearEnd: get(row, idx, 'Financial Year End') || get(row, idx, 'Financial year end')
-    };
-
-    for (const field of numericFields) {
-      out[field.key] = toNumber(get(row, idx, field.column));
+    const year = cleanCell(get(row, idx, 'Academic year'));
+    if (!year) {
+      return;
     }
 
-    rowData = out;
+    if (!isYearMonthAll(get(row, idx, 'Year End Month'))) {
+      return;
+    }
+
+    if (!byYear.has(year)) {
+      byYear.set(
+        year,
+        createTable1YearRow({
+          ukprn,
+          provider: provider || UCL_NAME,
+          financialYearEnd: cleanCell(getAny(row, idx, ['Financial Year End', 'Financial year end'])),
+          academicYear: year
+        })
+      );
+    }
+
+    const item = byYear.get(year);
+    if (!item.financialYearEnd) {
+      item.financialYearEnd = cleanCell(getAny(row, idx, ['Financial Year End', 'Financial year end']));
+    }
+
+    const marker = cleanCell(get(row, idx, 'Category marker'));
+    const category = cleanCell(get(row, idx, 'Category'));
+    const key = TABLE1_FIELD_MAP[`${marker}|${category}`];
+
+    if (!key) {
+      return;
+    }
+
+    item[key] = toNumber(get(row, idx, 'Value(£000s)'));
   });
 
-  if (!rowData) {
-    throw new Error(`No UCL row found in ${filePath}`);
+  if (!byYear.size) {
+    throw new Error(`No UCL year data found in ${filePath}`);
   }
 
-  return rowData;
+  return ensureYearMapRows(byYear);
 }
 
-async function parseTable5() {
+async function parseTable6() {
+  const dirPath = resolveExistingDir(SOURCE_DIR, TABLE6_DIR_CANDIDATES);
   const files = fs
-    .readdirSync(TABLE5_DIR)
+    .readdirSync(dirPath)
     .filter((file) => file.toLowerCase().endsWith('.csv'))
     .sort();
 
   const byYear = new Map();
 
   for (const file of files) {
-    const filePath = path.join(TABLE5_DIR, file);
+    const filePath = path.join(dirPath, file);
 
     await walkCsvRows(filePath, (row, idx) => {
       const ukprn = get(row, idx, 'UKPRN');
-      const provider = get(row, idx, 'HE provider');
+      const provider = getAny(row, idx, ['HE Provider', 'HE provider']);
+
+      if (ukprn !== UCL_UKPRN && provider !== UCL_NAME) {
+        return;
+      }
+
+      const financialYearEnd = cleanCell(getAny(row, idx, ['Financial Year End', 'Financial year end']));
+      const academicYear =
+        cleanCell(get(row, idx, 'Academic year')) ||
+        academicYearFromDate(financialYearEnd) ||
+        academicYearFromFilename(file);
+
+      if (!academicYear) {
+        return;
+      }
+
+      byYear.set(academicYear, {
+        ukprn,
+        provider: provider || UCL_NAME,
+        financialYearEnd,
+        academicYear,
+        totalHomeFees: toNumber(get(row, idx, 'Total Home fees')),
+        totalRestOfUkFees: toNumber(get(row, idx, 'Total Rest of UK fees')),
+        totalUkFees: toNumber(get(row, idx, 'Total UK fees')),
+        totalEuFees: toNumber(get(row, idx, 'Total EU fees')),
+        totalUkAndEuFees: toNumber(get(row, idx, 'Total UK and EU fees')),
+        totalNonEuFees: toNumber(get(row, idx, 'Total Non-EU fees')),
+        totalNonUkFees: toNumber(get(row, idx, 'Total Non-UK fees')),
+        totalHeCourseFees: toNumber(get(row, idx, 'Total HE course fees')),
+        totalResearchTrainingSupportGrants: toNumber(get(row, idx, 'Total research training support grants')),
+        nonCreditBearingCourseFees: toNumber(get(row, idx, 'Non-credit bearing course fees')),
+        feCourseFees: toNumber(get(row, idx, 'FE course fees')),
+        totalTuitionFeesAndEducationContracts: toNumber(get(row, idx, 'Total tuition fees and education contracts')),
+        contractedOutActivityFeeIncome: toNumber(
+          getAny(row, idx, [
+            'Of which: Net fee income relating to contracted out activity',
+            'Of which: Net fee income relating to contracted out activity '
+          ])
+        )
+      });
+    });
+  }
+
+  if (!byYear.size) {
+    throw new Error(`No UCL rows found in ${dirPath}`);
+  }
+
+  return ensureYearMapRows(byYear);
+}
+
+async function parseTable8() {
+  const pathCandidate = path.join(SOURCE_DIR, TABLE8_DIR_CANDIDATES[0]);
+
+  if (fs.existsSync(pathCandidate) && fs.statSync(pathCandidate).isDirectory()) {
+    const files = fs
+      .readdirSync(pathCandidate)
+      .filter((file) => file.toLowerCase().endsWith('.csv'))
+      .sort();
+
+    const byYear = new Map();
+
+    for (const file of files) {
+      const filePath = path.join(pathCandidate, file);
+
+      await walkCsvRows(filePath, (row, idx) => {
+        const ukprn = get(row, idx, 'UKPRN');
+        const provider = getAny(row, idx, ['HE provider', 'HE Provider']);
+
+        if (ukprn !== UCL_UKPRN && provider !== UCL_NAME) {
+          return;
+        }
+
+        const yearEndMonth = get(row, idx, 'Year End Month');
+        if (!isYearMonthAll(yearEndMonth)) {
+          return;
+        }
+
+        const hesaCostCentre = cleanCell(get(row, idx, 'HESA cost centre'));
+        const academicDepartments = cleanCell(get(row, idx, 'Academic departments'));
+        if (hesaCostCentre !== 'Total expenditure' || academicDepartments !== 'Total expenditure') {
+          return;
+        }
+
+        const activity = cleanCell(get(row, idx, 'Activity'));
+        const fieldKey = TABLE8_ACTIVITY_MAP[activity];
+        if (!fieldKey) {
+          return;
+        }
+
+        const financialYearEnd = cleanCell(getAny(row, idx, ['Financial year end', 'Financial Year End']));
+        const academicYear =
+          cleanCell(get(row, idx, 'Academic year')) ||
+          academicYearFromDate(financialYearEnd) ||
+          academicYearFromFilename(file);
+
+        if (!academicYear) {
+          return;
+        }
+
+        if (!byYear.has(academicYear)) {
+          byYear.set(
+            academicYear,
+            createTable8YearRow({
+              ukprn,
+              provider: provider || UCL_NAME,
+              financialYearEnd,
+              academicYear
+            })
+          );
+        }
+
+        const yearRow = byYear.get(academicYear);
+        if (!yearRow.financialYearEnd) {
+          yearRow.financialYearEnd = financialYearEnd;
+        }
+
+        yearRow[fieldKey] = toNumber(get(row, idx, 'Value(£000s)'));
+      });
+    }
+
+    if (!byYear.size) {
+      throw new Error(`No UCL rows found in ${pathCandidate}`);
+    }
+
+    return ensureYearMapRows(byYear);
+  }
+
+  const singleFilePath = resolveExistingFile(SOURCE_DIR, TABLE8_DIR_CANDIDATES.slice(1));
+  const byYear = new Map();
+
+  await walkCsvRows(singleFilePath, (row, idx) => {
+    const ukprn = get(row, idx, 'UKPRN');
+    const provider = getAny(row, idx, ['HE provider', 'HE Provider']);
+
+    if (ukprn !== UCL_UKPRN && provider !== UCL_NAME) {
+      return;
+    }
+
+    const academicYear =
+      cleanCell(get(row, idx, 'Academic year')) ||
+      academicYearFromDate(getAny(row, idx, ['Financial year end', 'Financial Year End']));
+
+    if (!academicYear) {
+      return;
+    }
+
+    const yearEndMonth = get(row, idx, 'Year End Month');
+    if (!isYearMonthAll(yearEndMonth)) {
+      return;
+    }
+
+    const hesaCostCentre = cleanCell(get(row, idx, 'HESA cost centre'));
+    const academicDepartments = cleanCell(get(row, idx, 'Academic departments'));
+    if (hesaCostCentre !== 'Total expenditure' || academicDepartments !== 'Total expenditure') {
+      return;
+    }
+
+    const activity = cleanCell(get(row, idx, 'Activity'));
+    const fieldKey = TABLE8_ACTIVITY_MAP[activity];
+    if (!fieldKey) {
+      return;
+    }
+
+    if (!byYear.has(academicYear)) {
+      byYear.set(
+        academicYear,
+        createTable8YearRow({
+          ukprn,
+          provider: provider || UCL_NAME,
+          financialYearEnd: cleanCell(getAny(row, idx, ['Financial year end', 'Financial Year End'])),
+          academicYear
+        })
+      );
+    }
+
+    const yearRow = byYear.get(academicYear);
+    yearRow[fieldKey] = toNumber(get(row, idx, 'Value(£000s)'));
+  });
+
+  if (!byYear.size) {
+    throw new Error(`No UCL rows found in ${singleFilePath}`);
+  }
+
+  return ensureYearMapRows(byYear);
+}
+
+async function parseTable5() {
+  const table5Dir = resolveExistingDir(SOURCE_DIR, TABLE5_DIR_CANDIDATES);
+  const files = fs
+    .readdirSync(table5Dir)
+    .filter((file) => file.toLowerCase().endsWith('.csv'))
+    .sort();
+
+  const byYear = new Map();
+
+  for (const file of files) {
+    const filePath = path.join(table5Dir, file);
+
+    await walkCsvRows(filePath, (row, idx) => {
+      const ukprn = get(row, idx, 'UKPRN');
+      const provider = getAny(row, idx, ['HE provider', 'HE Provider']);
 
       if (ukprn !== UCL_UKPRN && provider !== UCL_NAME) {
         return;
@@ -255,7 +614,9 @@ async function parseTable5() {
       const code = sourceCode(source);
       const label = sourceLabel(source);
 
-      const isTotalResearchMarker = marker.includes('Total research grants and contracts') || costCentre.includes('Total research grants and contracts');
+      const isTotalResearchMarker =
+        marker.includes('Total research grants and contracts') ||
+        costCentre.includes('Total research grants and contracts');
 
       if (isTotalResearchMarker) {
         if (code === '15') {
@@ -302,8 +663,7 @@ async function parseTable5() {
     });
   }
 
-  const years = [...byYear.keys()].sort((a, b) => Number(a.slice(0, 4)) - Number(b.slice(0, 4)));
-
+  const years = [...byYear.keys()].sort(yearSort);
   const out = {};
 
   for (const year of years) {
@@ -355,56 +715,12 @@ async function run() {
     );
   }
 
-  const table1 = await parseSingleRowTable(path.join(SOURCE_DIR, 'Table 1 - Consolidated statement of comprehensive income and expenditure 2015:16 to 2024:25.csv'), [
-    { key: 'tuitionFeesAndEducationContracts', column: 'Tuition fees and education contracts' },
-    { key: 'fundingBodyGrants', column: 'Funding body grants' },
-    { key: 'researchGrantsAndContracts', column: 'Research grants and contracts' },
-    { key: 'otherIncome', column: 'Other income' },
-    { key: 'investmentIncome', column: 'Investment income' },
-    { key: 'donationsAndEndowments', column: 'Donations and endowments' },
-    { key: 'totalIncome', column: 'Total income' },
-    { key: 'staffCosts', column: 'Staff costs' },
-    { key: 'restructuringCosts', column: 'Restructuring costs' },
-    { key: 'otherOperatingExpenses', column: 'Other operating expenses' },
-    { key: 'depreciationAndAmortisation', column: 'Depreciation and amortisation' },
-    { key: 'interestAndOtherFinanceCosts', column: 'Interest and other finance costs' },
-    { key: 'totalExpenditure', column: 'Total expenditure' }
-  ]);
-
-  table1.academicYear = academicYearFromDate(table1.financialYearEnd);
-
-  const table6 = await parseSingleRowTable(path.join(SOURCE_DIR, 'T6.csv'), [
-    { key: 'totalHomeFees', column: 'Total Home fees' },
-    { key: 'totalRestOfUkFees', column: 'Total Rest of UK fees' },
-    { key: 'totalUkFees', column: 'Total UK fees' },
-    { key: 'totalEuFees', column: 'Total EU fees' },
-    { key: 'totalUkAndEuFees', column: 'Total UK and EU fees' },
-    { key: 'totalNonEuFees', column: 'Total Non-EU fees' },
-    { key: 'totalNonUkFees', column: 'Total Non-UK fees' },
-    { key: 'totalHeCourseFees', column: 'Total HE course fees' },
-    { key: 'totalResearchTrainingSupportGrants', column: 'Total research training support grants' },
-    { key: 'nonCreditBearingCourseFees', column: 'Non-credit bearing course fees' },
-    { key: 'feCourseFees', column: 'FE course fees' },
-    { key: 'totalTuitionFeesAndEducationContracts', column: 'Total tuition fees and education contracts' },
-    { key: 'contractedOutActivityFeeIncome', column: 'Of which: Net fee income relating to contracted out activity' }
-  ]);
-
-  table6.academicYear = table1.academicYear;
-
-  const table8 = await parseSingleRowTable(path.join(SOURCE_DIR, 'Table 8 - Expenditure - breakdown by HE provider, activity, HESA cost centre and academic year 2015:16 to 2024:25.csv'), [
-    { key: 'academicStaffCosts', column: 'Academic staff costs' },
-    { key: 'otherStaffCosts', column: 'Other staff costs' },
-    { key: 'totalStaffCosts', column: 'Total staff costs' },
-    { key: 'restructuringCosts', column: 'Restructuring costs' },
-    { key: 'otherOperatingExpenses', column: 'Other operating expenses' },
-    { key: 'depreciationAndAmortisation', column: 'Depreciation and amortisation' },
-    { key: 'interestAndOtherFinanceCosts', column: 'Interest and other finance costs' },
-    { key: 'totalExpenditure', column: 'Total expenditure' }
-  ]);
-
-  table8.academicYear = table1.academicYear;
-
+  const table1 = await parseTable1();
+  const table6 = await parseTable6();
+  const table8 = await parseTable8();
   const table5 = await parseTable5();
+
+  const baselineYear = table1.years[table1.years.length - 1] ?? '';
 
   const output = {
     generatedAt: new Date().toISOString(),
@@ -413,9 +729,9 @@ async function run() {
       name: UCL_NAME
     },
     notes: {
-      overviewBaselineYear: table1.academicYear,
+      overviewBaselineYear: baselineYear,
       overviewMethod:
-        'Overview uses exact values from the single UCL row in Table 1 (academic year 2023/24). No extrapolation is applied.'
+        'Overview Sankey uses exact Table 1 values for the selected academic year. Available years come directly from the loaded files; no extrapolation is applied.'
     },
     table1,
     table6,

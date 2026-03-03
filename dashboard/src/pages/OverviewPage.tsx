@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Modal } from '../components/Modal';
 import { PieChart } from '../components/PieChart';
 import { SankeyChart } from '../components/SankeyChart';
 import { ChatWidget } from '../components/ChatWidget';
+import { YearSelect } from '../components/YearSelect';
 import { ErrorView, LoadingView } from '../components/StateViews';
 import { useDashboardData } from '../data/useDashboardData';
 import {
@@ -17,7 +18,14 @@ type DrilldownKey = 'tuition' | 'research' | 'expenditure' | null;
 
 export function OverviewPage() {
   const { loading, error, data } = useDashboardData();
+  const [year, setYear] = useState('');
   const [drilldown, setDrilldown] = useState<DrilldownKey>(null);
+
+  useEffect(() => {
+    if (!year && data?.table1.years.length) {
+      setYear(data.table1.years[data.table1.years.length - 1]);
+    }
+  }, [data, year]);
 
   if (loading) {
     return <LoadingView text="Loading UCL dashboard data..." />;
@@ -27,12 +35,15 @@ export function OverviewPage() {
     return <ErrorView text={error ?? 'Unable to load data.'} />;
   }
 
-  const year = data.table1.academicYear;
-  const overview = buildOverviewModel(data);
+  if (!year) {
+    return <ErrorView text="No Table 1 year data available." />;
+  }
 
-  const tuition = buildTuitionBreakdown(data);
+  const overview = buildOverviewModel(data, year);
+
+  const tuition = buildTuitionBreakdown(data, year);
   const research = buildResearchSourceBreakdown(data, year);
-  const expenditure = buildExpenditureBreakdown(data);
+  const expenditure = buildExpenditureBreakdown(data, year);
 
   const onChartClick = (name: string) => {
     if (name.includes('Tuition')) {
@@ -62,9 +73,7 @@ export function OverviewPage() {
   return (
     <div className="page-stack">
       <section className="control-strip panel">
-        <p>
-          Overview year (Table 1): <strong>{year}</strong>
-        </p>
+        <YearSelect years={data.table1.years} value={year} onChange={setYear} label="Overview year (Table 1)" />
         <p>
           Provider: <strong>{data.provider.name}</strong> ({data.provider.ukprn})
         </p>
@@ -102,8 +111,12 @@ export function OverviewPage() {
       />
 
       {drilldown === 'tuition' ? (
-        <Modal title={`Tuition Detail (${data.table6.academicYear})`} onClose={() => setDrilldown(null)}>
-          <PieChart title="Table 6: UK vs Non-UK + Other Fee Components" data={tuition} height={380} />
+        <Modal title={`Tuition Detail (${year})`} onClose={() => setDrilldown(null)}>
+          {tuition.length > 0 ? (
+            <PieChart title="Table 6: UK vs Non-UK + Other Fee Components" data={tuition} height={380} />
+          ) : (
+            <div className="empty-view">No Table 6 tuition data for {year}.</div>
+          )}
         </Modal>
       ) : null}
 
@@ -118,8 +131,12 @@ export function OverviewPage() {
       ) : null}
 
       {drilldown === 'expenditure' ? (
-        <Modal title={`Expenditure Detail (${data.table8.academicYear})`} onClose={() => setDrilldown(null)}>
-          <PieChart title="Table 8: Expenditure Breakdown" data={expenditure} height={380} />
+        <Modal title={`Expenditure Detail (${year})`} onClose={() => setDrilldown(null)}>
+          {expenditure.length > 0 ? (
+            <PieChart title="Table 8: Expenditure Breakdown" data={expenditure} height={380} />
+          ) : (
+            <div className="empty-view">No Table 8 expenditure data for {year}.</div>
+          )}
         </Modal>
       ) : null}
     </div>

@@ -19,8 +19,12 @@ function uniqueNodeNames(links: SankeyLink[]) {
   return [...new Set(links.flatMap((link) => [link.source, link.target]))];
 }
 
-export function buildOverviewModel(data: DashboardData): OverviewModel {
-  const baseline = data.table1;
+export function buildOverviewModel(data: DashboardData, year: string): OverviewModel {
+  const baseline = data.table1.byYear[year];
+
+  if (!baseline) {
+    throw new Error(`No Table 1 data found for ${year}.`);
+  }
 
   const income = [
     { name: 'Tuition fees and education contracts', value: baseline.tuitionFeesAndEducationContracts },
@@ -40,7 +44,7 @@ export function buildOverviewModel(data: DashboardData): OverviewModel {
     { name: 'Interest and other finance costs', value: baseline.interestAndOtherFinanceCosts }
   ];
 
-  const totalExpenditure = expenditure.reduce((sum, item) => sum + item.value, 0);
+  const totalExpenditure = baseline.totalExpenditure;
   const netPosition = totalIncome - totalExpenditure;
 
   const links: SankeyLink[] = [];
@@ -77,8 +81,12 @@ export function buildOverviewModel(data: DashboardData): OverviewModel {
   };
 }
 
-export function buildTuitionBreakdown(data: DashboardData): NamedValue[] {
-  const t6 = data.table6;
+export function buildTuitionBreakdown(data: DashboardData, year: string): NamedValue[] {
+  const t6 = data.table6.byYear[year];
+
+  if (!t6) {
+    return [];
+  }
 
   const slices = [
     { name: 'UK fees', value: t6.totalUkFees },
@@ -91,8 +99,12 @@ export function buildTuitionBreakdown(data: DashboardData): NamedValue[] {
   return slices.filter((item) => item.value > 0).sort((a, b) => b.value - a.value);
 }
 
-export function buildTuitionDomicileBreakdown(data: DashboardData): NamedValue[] {
-  const t6 = data.table6;
+export function buildTuitionDomicileBreakdown(data: DashboardData, year: string): NamedValue[] {
+  const t6 = data.table6.byYear[year];
+
+  if (!t6) {
+    return [];
+  }
 
   const detailed = [
     { name: 'Home fees', value: t6.totalHomeFees },
@@ -118,8 +130,13 @@ export function buildResearchSourceBreakdown(data: DashboardData, year: string):
   return data.table5.byYear[year]?.sources ?? [];
 }
 
-export function buildExpenditureBreakdown(data: DashboardData): NamedValue[] {
-  const t8 = data.table8;
+export function buildExpenditureBreakdown(data: DashboardData, year: string): NamedValue[] {
+  const t8 = data.table8.byYear[year];
+
+  if (!t8) {
+    return [];
+  }
+
   return [
     { name: 'Academic staff costs', value: t8.academicStaffCosts },
     { name: 'Other staff costs', value: t8.otherStaffCosts },

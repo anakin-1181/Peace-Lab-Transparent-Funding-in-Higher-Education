@@ -88,9 +88,11 @@ export function buildTuitionBreakdown(data: DashboardData, year: string): NamedV
     return [];
   }
 
+  const nonUkFees = t6.totalNonUkFees > 0 ? t6.totalNonUkFees : t6.totalEuFees + t6.totalNonEuFees;
+
   const slices = [
     { name: 'UK fees', value: t6.totalUkFees },
-    { name: 'Non-UK fees', value: t6.totalNonUkFees },
+    { name: 'Non-UK fees', value: nonUkFees },
     { name: 'Research training support grants', value: t6.totalResearchTrainingSupportGrants },
     { name: 'Non-credit bearing course fees', value: t6.nonCreditBearingCourseFees },
     { name: 'FE course fees', value: t6.feCourseFees }
@@ -152,16 +154,27 @@ export function buildDepartmentSankey(
 ) {
   const deptNode = `${department.code} ${department.name}`;
   const deptTotalNode = '15 Total research grants and contracts';
+  const adjustmentNode = 'Net adjustments';
 
   const links: SankeyLink[] = [];
+  let sourceTotal = 0;
 
   for (const source of department.sources) {
+    sourceTotal += source.value;
     links.push({
       source: source.name,
       target: deptNode,
       value: source.value
     });
   }
+
+  const residual = department.total - sourceTotal;
+  if (residual > 0) {
+    links.push({ source: adjustmentNode, target: deptNode, value: residual });
+  } else if (residual < 0) {
+    links.push({ source: deptNode, target: adjustmentNode, value: Math.abs(residual) });
+  }
+
   links.push({ source: deptNode, target: deptTotalNode, value: department.total });
 
   return {

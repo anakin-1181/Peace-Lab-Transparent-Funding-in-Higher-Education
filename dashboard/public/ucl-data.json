@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-03T01:05:47.134Z",
+  "generatedAt": "2026-03-03T01:18:45.120Z",
   "provider": {
     "ukprn": "10007784",
     "name": "University College London"
@@ -4614,7 +4614,7 @@
         "sources": [
           {
             "name": "Research Councils Total",
-            "value": 162216
+            "value": 154000
           },
           {
             "name": "UK Charities (Open)",
@@ -4677,7 +4677,7 @@
               },
               {
                 "name": "Research Councils Total",
-                "value": 51366
+                "value": 49983
               },
               {
                 "name": "UK Government & Authorities",
@@ -4732,7 +4732,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 15868
+                "value": 15068
               },
               {
                 "name": "UK Charities (Open)",
@@ -4791,7 +4791,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 20828
+                "value": 19519
               },
               {
                 "name": "EU Government Bodies",
@@ -4842,7 +4842,7 @@
               },
               {
                 "name": "Research Councils Total",
-                "value": 5138
+                "value": 4653
               },
               {
                 "name": "EU Government Bodies",
@@ -4897,7 +4897,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 7896
+                "value": 7733
               },
               {
                 "name": "UK Government & Authorities",
@@ -4948,7 +4948,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 7826
+                "value": 7710
               },
               {
                 "name": "EU Government Bodies",
@@ -4995,7 +4995,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 5269
+                "value": 5019
               },
               {
                 "name": "UK Charities (Open)",
@@ -5046,7 +5046,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 8057
+                "value": 7772
               },
               {
                 "name": "EU Government Bodies",
@@ -5105,7 +5105,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 6894
+                "value": 6571
               },
               {
                 "name": "EU Government Bodies",
@@ -5160,7 +5160,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 6293
+                "value": 5982
               },
               {
                 "name": "EU Government Bodies",
@@ -5214,12 +5214,12 @@
             "total": 10040,
             "sources": [
               {
-                "name": "Research Councils Total",
-                "value": 4065
-              },
-              {
                 "name": "UK Industry & Commerce",
                 "value": 3829
+              },
+              {
+                "name": "Research Councils Total",
+                "value": 3611
               },
               {
                 "name": "EU Government Bodies",
@@ -5262,7 +5262,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 4454
+                "value": 4383
               },
               {
                 "name": "EU Government Bodies",
@@ -5301,7 +5301,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 1353
+                "value": 1342
               },
               {
                 "name": "UK Government & Authorities",
@@ -5352,7 +5352,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 1458
+                "value": 1413
               },
               {
                 "name": "EU Government Bodies",
@@ -5446,7 +5446,7 @@
               },
               {
                 "name": "Research Councils Total",
-                "value": 889
+                "value": 629
               },
               {
                 "name": "UK Charities (Open)",
@@ -5481,7 +5481,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 2169
+                "value": 2047
               },
               {
                 "name": "EU Government Bodies",
@@ -5520,7 +5520,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 2018
+                "value": 2011
               },
               {
                 "name": "EU Government Bodies",
@@ -5575,7 +5575,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 1054
+                "value": 1039
               },
               {
                 "name": "UK Industry & Commerce",
@@ -5606,7 +5606,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 1156
+                "value": 890
               },
               {
                 "name": "UK Charities (Open)",
@@ -5645,7 +5645,7 @@
               },
               {
                 "name": "Research Councils Total",
-                "value": 398
+                "value": 257
               },
               {
                 "name": "UK Charities (Open)",
@@ -5675,12 +5675,12 @@
                 "value": 215
               },
               {
-                "name": "Research Councils Total",
-                "value": 166
-              },
-              {
                 "name": "EU Government Bodies",
                 "value": 149
+              },
+              {
+                "name": "Research Councils Total",
+                "value": 132
               },
               {
                 "name": "UK Charities (Open)",
@@ -5707,7 +5707,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 492
+                "value": 322
               },
               {
                 "name": "EU Government Bodies",
@@ -5734,7 +5734,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 358
+                "value": 263
               },
               {
                 "name": "EU Government Bodies",
@@ -5761,7 +5761,7 @@
               },
               {
                 "name": "Research Councils Total",
-                "value": 172
+                "value": 169
               },
               {
                 "name": "UK Charities (Open)",
@@ -5788,7 +5788,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 564
+                "value": 471
               },
               {
                 "name": "EU Government Bodies",
@@ -5807,7 +5807,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 272
+                "value": 196
               },
               {
                 "name": "UK Charities (Open)",
@@ -5861,7 +5861,7 @@
               },
               {
                 "name": "Research Councils Total",
-                "value": 126
+                "value": 94
               },
               {
                 "name": "UK Charities (Open)",
@@ -5879,12 +5879,12 @@
             "total": 273,
             "sources": [
               {
-                "name": "Research Councils Total",
-                "value": 154
-              },
-              {
                 "name": "UK Charities (Open)",
                 "value": 137
+              },
+              {
+                "name": "Research Councils Total",
+                "value": 77
               },
               {
                 "name": "Non-EU Charities (Open)",
@@ -5903,7 +5903,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 94
+                "value": 90
               },
               {
                 "name": "UK Charities (Open)",
@@ -5922,7 +5922,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 234
+                "value": 118
               },
               {
                 "name": "UK Charities (Open)",
@@ -5975,7 +5975,7 @@
         "sources": [
           {
             "name": "Research Councils Total",
-            "value": 156867
+            "value": 149614
           },
           {
             "name": "UK Charities (Open)",
@@ -6038,7 +6038,7 @@
               },
               {
                 "name": "Research Councils Total",
-                "value": 50695
+                "value": 49539
               },
               {
                 "name": "UK Government & Authorities",
@@ -6097,7 +6097,7 @@
               },
               {
                 "name": "Research Councils Total",
-                "value": 13979
+                "value": 13478
               },
               {
                 "name": "EU Government Bodies",
@@ -6152,7 +6152,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 19561
+                "value": 17932
               },
               {
                 "name": "UK Government & Authorities",
@@ -6211,7 +6211,7 @@
               },
               {
                 "name": "Research Councils Total",
-                "value": 4922
+                "value": 4392
               },
               {
                 "name": "UK Government & Authorities",
@@ -6266,7 +6266,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 8418
+                "value": 8100
               },
               {
                 "name": "UK Government & Authorities",
@@ -6313,7 +6313,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 8537
+                "value": 8417
               },
               {
                 "name": "EU Government Bodies",
@@ -6368,7 +6368,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 7331
+                "value": 7272
               },
               {
                 "name": "UK Other Sources",
@@ -6415,7 +6415,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 5425
+                "value": 5035
               },
               {
                 "name": "UK Charities (Open)",
@@ -6470,7 +6470,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 6837
+                "value": 6421
               },
               {
                 "name": "EU Government Bodies",
@@ -6521,7 +6521,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 5115
+                "value": 5046
               },
               {
                 "name": "EU Government Bodies",
@@ -6572,7 +6572,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 4044
+                "value": 3556
               },
               {
                 "name": "UK Industry & Commerce",
@@ -6619,7 +6619,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 4155
+                "value": 3999
               },
               {
                 "name": "EU Government Bodies",
@@ -6658,7 +6658,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 2328
+                "value": 1983
               },
               {
                 "name": "EU Government Bodies",
@@ -6795,7 +6795,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 1602
+                "value": 1598
               },
               {
                 "name": "UK Government & Authorities",
@@ -6850,7 +6850,7 @@
               },
               {
                 "name": "Research Councils Total",
-                "value": 435
+                "value": 434
               },
               {
                 "name": "UK Charities (Open)",
@@ -6885,7 +6885,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 1642
+                "value": 1635
               },
               {
                 "name": "EU Government Bodies",
@@ -6920,7 +6920,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 1437
+                "value": 1158
               },
               {
                 "name": "UK Charities (Open)",
@@ -6963,7 +6963,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 995
+                "value": 989
               },
               {
                 "name": "EU Government Bodies",
@@ -7002,7 +7002,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 850
+                "value": 619
               },
               {
                 "name": "EU Government Bodies",
@@ -7033,7 +7033,7 @@
               },
               {
                 "name": "Research Councils Total",
-                "value": 547
+                "value": 355
               },
               {
                 "name": "UK Charities (Open)",
@@ -7072,7 +7072,7 @@
               },
               {
                 "name": "Research Councils Total",
-                "value": 73
+                "value": 74
               },
               {
                 "name": "UK Charities (Other)",
@@ -7103,7 +7103,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 353
+                "value": 205
               },
               {
                 "name": "EU Government Bodies",
@@ -7138,7 +7138,7 @@
               },
               {
                 "name": "Research Councils Total",
-                "value": 130
+                "value": 80
               },
               {
                 "name": "UK Other Sources",
@@ -7184,12 +7184,12 @@
                 "value": 61
               },
               {
-                "name": "Research Councils Total",
-                "value": 16
-              },
-              {
                 "name": "UK Government & Authorities",
                 "value": 11
+              },
+              {
+                "name": "Research Councils Total",
+                "value": 8
               }
             ]
           },
@@ -7204,7 +7204,7 @@
               },
               {
                 "name": "Research Councils Total",
-                "value": 174
+                "value": 87
               },
               {
                 "name": "UK Charities (Other)",
@@ -7231,7 +7231,7 @@
               },
               {
                 "name": "Research Councils Total",
-                "value": 98
+                "value": 91
               },
               {
                 "name": "Non-EU Charities (Open)",
@@ -7246,7 +7246,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 256
+                "value": 238
               },
               {
                 "name": "EU Government Bodies",
@@ -7269,7 +7269,7 @@
               },
               {
                 "name": "Research Councils Total",
-                "value": 63
+                "value": 49
               },
               {
                 "name": "UK Charities (Open)",
@@ -7291,12 +7291,12 @@
                 "value": 92
               },
               {
-                "name": "Research Councils Total",
-                "value": 65
-              },
-              {
                 "name": "EU Government Bodies",
                 "value": 64
+              },
+              {
+                "name": "Research Councils Total",
+                "value": 63
               },
               {
                 "name": "EU Other Sources",
@@ -7311,7 +7311,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 105
+                "value": 102
               },
               {
                 "name": "EU Charities (Open)",
@@ -7338,7 +7338,7 @@
               },
               {
                 "name": "Research Councils Total",
-                "value": 4
+                "value": 2
               }
             ]
           },
@@ -7360,7 +7360,7 @@
         "sources": [
           {
             "name": "Research Councils Total",
-            "value": 155703
+            "value": 149076
           },
           {
             "name": "UK Charities (Open)",
@@ -7423,7 +7423,7 @@
               },
               {
                 "name": "Research Councils Total",
-                "value": 47396
+                "value": 46635
               },
               {
                 "name": "UK Government & Authorities",
@@ -7477,12 +7477,12 @@
             "total": 31182,
             "sources": [
               {
-                "name": "Research Councils Total",
-                "value": 14001
-              },
-              {
                 "name": "UK Charities (Open)",
                 "value": 13334
+              },
+              {
+                "name": "Research Councils Total",
+                "value": 13262
               },
               {
                 "name": "EU Government Bodies",
@@ -7537,7 +7537,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 20657
+                "value": 19199
               },
               {
                 "name": "EU Government Bodies",
@@ -7596,7 +7596,7 @@
               },
               {
                 "name": "Research Councils Total",
-                "value": 3982
+                "value": 3525
               },
               {
                 "name": "EU Government Bodies",
@@ -7651,7 +7651,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 8925
+                "value": 8694
               },
               {
                 "name": "EU Government Bodies",
@@ -7706,7 +7706,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 8989
+                "value": 8773
               },
               {
                 "name": "UK Government & Authorities",
@@ -7757,7 +7757,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 5094
+                "value": 4717
               },
               {
                 "name": "UK Charities (Open)",
@@ -7812,7 +7812,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 6237
+                "value": 6231
               },
               {
                 "name": "UK Other Sources",
@@ -7863,7 +7863,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 6486
+                "value": 6469
               },
               {
                 "name": "EU Government Bodies",
@@ -7914,7 +7914,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 5590
+                "value": 5321
               },
               {
                 "name": "EU Government Bodies",
@@ -7969,7 +7969,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 4614
+                "value": 4144
               },
               {
                 "name": "UK Industry & Commerce",
@@ -8004,7 +8004,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 4104
+                "value": 4124
               },
               {
                 "name": "EU Government Bodies",
@@ -8047,7 +8047,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 2340
+                "value": 2323
               },
               {
                 "name": "UK Government & Authorities",
@@ -8094,7 +8094,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 2433
+                "value": 1931
               },
               {
                 "name": "UK Government & Authorities",
@@ -8149,7 +8149,7 @@
               },
               {
                 "name": "Research Councils Total",
-                "value": 669
+                "value": 569
               },
               {
                 "name": "EU Other Sources",
@@ -8184,7 +8184,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 2213
+                "value": 1990
               },
               {
                 "name": "EU Government Bodies",
@@ -8223,7 +8223,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 1879
+                "value": 1878
               },
               {
                 "name": "UK Government & Authorities",
@@ -8262,7 +8262,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 1091
+                "value": 1089
               },
               {
                 "name": "UK Government & Authorities",
@@ -8308,12 +8308,12 @@
             "total": 1753,
             "sources": [
               {
-                "name": "Non-EU Charities (Open)",
-                "value": 524
+                "name": "Research Councils Total",
+                "value": 578
               },
               {
-                "name": "Research Councils Total",
-                "value": 523
+                "name": "Non-EU Charities (Open)",
+                "value": 524
               },
               {
                 "name": "EU Government Bodies",
@@ -8340,7 +8340,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 884
+                "value": 867
               },
               {
                 "name": "EU Government Bodies",
@@ -8383,7 +8383,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 835
+                "value": 658
               },
               {
                 "name": "EU Government Bodies",
@@ -8422,7 +8422,7 @@
               },
               {
                 "name": "Research Councils Total",
-                "value": 346
+                "value": 332
               },
               {
                 "name": "UK Charities (Open)",
@@ -8460,12 +8460,12 @@
                 "value": 114
               },
               {
-                "name": "Research Councils Total",
-                "value": 92
-              },
-              {
                 "name": "UK Industry & Commerce",
                 "value": 86
+              },
+              {
+                "name": "Research Councils Total",
+                "value": 76
               },
               {
                 "name": "UK Charities (Other)",
@@ -8504,7 +8504,7 @@
               },
               {
                 "name": "Research Councils Total",
-                "value": 164
+                "value": 96
               },
               {
                 "name": "Non-EU Charities (Open)",
@@ -8519,7 +8519,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 264
+                "value": 262
               },
               {
                 "name": "EU Government Bodies",
@@ -8546,7 +8546,7 @@
               },
               {
                 "name": "Research Councils Total",
-                "value": 176
+                "value": 88
               },
               {
                 "name": "EU Charities (Open)",
@@ -8577,7 +8577,7 @@
               },
               {
                 "name": "Research Councils Total",
-                "value": 46
+                "value": 45
               },
               {
                 "name": "UK Government & Authorities",
@@ -8646,7 +8646,7 @@
               },
               {
                 "name": "Research Councils Total",
-                "value": 20
+                "value": 19
               }
             ]
           },
@@ -8657,7 +8657,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 167
+                "value": 94
               },
               {
                 "name": "UK Government & Authorities",
@@ -8688,7 +8688,7 @@
               },
               {
                 "name": "Research Councils Total",
-                "value": 72
+                "value": 64
               },
               {
                 "name": "Non-EU Charities (Open)",
@@ -8745,7 +8745,7 @@
         "sources": [
           {
             "name": "Research Councils Total",
-            "value": 187998
+            "value": 170445
           },
           {
             "name": "UK Charities (Open)",
@@ -8808,7 +8808,7 @@
               },
               {
                 "name": "Research Councils Total",
-                "value": 59466
+                "value": 56260
               },
               {
                 "name": "UK Government & Authorities",
@@ -8867,7 +8867,7 @@
               },
               {
                 "name": "Research Councils Total",
-                "value": 4357
+                "value": 3963
               },
               {
                 "name": "UK Government & Authorities",
@@ -8922,7 +8922,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 14282
+                "value": 13535
               },
               {
                 "name": "UK Charities (Open)",
@@ -8977,7 +8977,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 19619
+                "value": 17137
               },
               {
                 "name": "UK Government & Authorities",
@@ -9024,7 +9024,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 8134
+                "value": 7682
               },
               {
                 "name": "EU Government Bodies",
@@ -9083,7 +9083,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 6533
+                "value": 6195
               },
               {
                 "name": "UK Other Sources",
@@ -9134,7 +9134,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 6967
+                "value": 6435
               },
               {
                 "name": "EU Government Bodies",
@@ -9189,7 +9189,7 @@
               },
               {
                 "name": "Research Councils Total",
-                "value": 4055
+                "value": 3174
               },
               {
                 "name": "EU Government Bodies",
@@ -9240,7 +9240,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 8298
+                "value": 7816
               },
               {
                 "name": "EU Government Bodies",
@@ -9295,7 +9295,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 3800
+                "value": 3468
               },
               {
                 "name": "UK Government & Authorities",
@@ -9350,7 +9350,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 6153
+                "value": 6006
               },
               {
                 "name": "UK Charities (Open)",
@@ -9397,7 +9397,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 6975
+                "value": 6272
               },
               {
                 "name": "EU Government Bodies",
@@ -9432,7 +9432,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 2259
+                "value": 2052
               },
               {
                 "name": "EU Government Bodies",
@@ -9479,7 +9479,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 2763
+                "value": 2723
               },
               {
                 "name": "EU Government Bodies",
@@ -9530,7 +9530,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 2479
+                "value": 2258
               },
               {
                 "name": "UK Government & Authorities",
@@ -9581,7 +9581,7 @@
               },
               {
                 "name": "Research Councils Total",
-                "value": 1219
+                "value": 775
               },
               {
                 "name": "EU Other Sources",
@@ -9651,7 +9651,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 2110
+                "value": 1876
               },
               {
                 "name": "EU Government Bodies",
@@ -9690,7 +9690,7 @@
               },
               {
                 "name": "Research Councils Total",
-                "value": 1121
+                "value": 780
               },
               {
                 "name": "UK Charities (Open)",
@@ -9721,7 +9721,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 1062
+                "value": 1028
               },
               {
                 "name": "UK Government & Authorities",
@@ -9767,12 +9767,12 @@
             "total": 2071,
             "sources": [
               {
-                "name": "Research Councils Total",
-                "value": 984
-              },
-              {
                 "name": "EU Government Bodies",
                 "value": 797
+              },
+              {
+                "name": "Research Councils Total",
+                "value": 715
               },
               {
                 "name": "UK Charities (Open)",
@@ -9799,7 +9799,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 1542
+                "value": 1148
               },
               {
                 "name": "Non-EU Charities (Open)",
@@ -9842,7 +9842,7 @@
               },
               {
                 "name": "Research Councils Total",
-                "value": 89
+                "value": 79
               },
               {
                 "name": "EU Charities (Open)",
@@ -9869,7 +9869,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 402
+                "value": 347
               },
               {
                 "name": "EU Government Bodies",
@@ -9896,7 +9896,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 617
+                "value": 597
               },
               {
                 "name": "EU Government Bodies",
@@ -9927,7 +9927,7 @@
               },
               {
                 "name": "Research Councils Total",
-                "value": 109
+                "value": 104
               },
               {
                 "name": "Non-EU Other Sources",
@@ -9946,7 +9946,7 @@
               },
               {
                 "name": "Research Councils Total",
-                "value": 184
+                "value": 100
               },
               {
                 "name": "UK Charities (Open)",
@@ -9968,12 +9968,12 @@
             "total": 413,
             "sources": [
               {
-                "name": "Research Councils Total",
-                "value": 288
-              },
-              {
                 "name": "UK Charities (Open)",
                 "value": 219
+              },
+              {
+                "name": "Research Councils Total",
+                "value": 145
               },
               {
                 "name": "EU Government Bodies",
@@ -9988,7 +9988,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 234
+                "value": 155
               },
               {
                 "name": "UK Charities (Open)",
@@ -10015,7 +10015,7 @@
               },
               {
                 "name": "Research Councils Total",
-                "value": 9
+                "value": 17
               }
             ]
           },
@@ -10037,7 +10037,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 152
+                "value": 107
               },
               {
                 "name": "UK Charities (Open)",
@@ -10068,7 +10068,7 @@
               },
               {
                 "name": "Research Councils Total",
-                "value": 75
+                "value": 71
               },
               {
                 "name": "UK Charities (Open)",
@@ -10083,7 +10083,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 77
+                "value": 76
               },
               {
                 "name": "UK Charities (Open)",
@@ -10102,7 +10102,7 @@
         "sources": [
           {
             "name": "Research Councils Total",
-            "value": 190611
+            "value": 176915
           },
           {
             "name": "UK Charities (Open)",
@@ -10165,7 +10165,7 @@
               },
               {
                 "name": "Research Councils Total",
-                "value": 62238
+                "value": 59056
               },
               {
                 "name": "UK Government & Authorities",
@@ -10220,7 +10220,7 @@
               },
               {
                 "name": "Research Councils Total",
-                "value": 5076
+                "value": 4705
               },
               {
                 "name": "EU Government Bodies",
@@ -10275,7 +10275,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 13837
+                "value": 12864
               },
               {
                 "name": "UK Charities (Open)",
@@ -10334,7 +10334,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 20910
+                "value": 18807
               },
               {
                 "name": "UK Government & Authorities",
@@ -10381,7 +10381,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 17209
+                "value": 16976
               },
               {
                 "name": "UK Government & Authorities",
@@ -10432,7 +10432,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 7816
+                "value": 7432
               },
               {
                 "name": "EU Government Bodies",
@@ -10487,7 +10487,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 6499
+                "value": 6233
               },
               {
                 "name": "UK Other Sources",
@@ -10538,7 +10538,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 5796
+                "value": 4930
               },
               {
                 "name": "UK Charities (Open)",
@@ -10596,12 +10596,12 @@
             "total": 11936,
             "sources": [
               {
-                "name": "Research Councils Total",
-                "value": 5116
-              },
-              {
                 "name": "UK Government & Authorities",
                 "value": 4968
+              },
+              {
+                "name": "Research Councils Total",
+                "value": 4500
               },
               {
                 "name": "EU Government Bodies",
@@ -10648,7 +10648,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 6950
+                "value": 6233
               },
               {
                 "name": "EU Government Bodies",
@@ -10699,7 +10699,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 8301
+                "value": 7642
               },
               {
                 "name": "EU Government Bodies",
@@ -10754,7 +10754,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 7445
+                "value": 6712
               },
               {
                 "name": "UK Government & Authorities",
@@ -10785,7 +10785,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 3417
+                "value": 3106
               },
               {
                 "name": "UK Government & Authorities",
@@ -10840,7 +10840,7 @@
               },
               {
                 "name": "Research Councils Total",
-                "value": 1090
+                "value": 984
               },
               {
                 "name": "UK Government & Authorities",
@@ -10871,7 +10871,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 2225
+                "value": 2137
               },
               {
                 "name": "UK Government & Authorities",
@@ -10926,7 +10926,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 2473
+                "value": 2466
               },
               {
                 "name": "UK Charities (Other)",
@@ -10969,7 +10969,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 1230
+                "value": 1229
               },
               {
                 "name": "UK Industry & Commerce",
@@ -11016,7 +11016,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 1694
+                "value": 1531
               },
               {
                 "name": "EU Government Bodies",
@@ -11071,7 +11071,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 1190
+                "value": 1145
               },
               {
                 "name": "EU Government Bodies",
@@ -11114,7 +11114,7 @@
               },
               {
                 "name": "Research Councils Total",
-                "value": 744
+                "value": 436
               },
               {
                 "name": "UK Charities (Open)",
@@ -11141,7 +11141,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 1640
+                "value": 1031
               },
               {
                 "name": "Non-EU Charities (Open)",
@@ -11180,7 +11180,7 @@
               },
               {
                 "name": "Research Councils Total",
-                "value": 636
+                "value": 436
               },
               {
                 "name": "UK Charities (Open)",
@@ -11210,12 +11210,12 @@
             "total": 1158,
             "sources": [
               {
-                "name": "Research Councils Total",
-                "value": 689
-              },
-              {
                 "name": "UK Charities (Open)",
                 "value": 448
+              },
+              {
+                "name": "Research Councils Total",
+                "value": 424
               },
               {
                 "name": "EU Government Bodies",
@@ -11242,7 +11242,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 851
+                "value": 852
               },
               {
                 "name": "Non-EU Charities (Open)",
@@ -11269,7 +11269,7 @@
               },
               {
                 "name": "Research Councils Total",
-                "value": 343
+                "value": 200
               },
               {
                 "name": "UK Charities (Open)",
@@ -11304,7 +11304,7 @@
               },
               {
                 "name": "Research Councils Total",
-                "value": 61
+                "value": 56
               },
               {
                 "name": "UK Charities (Other)",
@@ -11327,7 +11327,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 249
+                "value": 237
               },
               {
                 "name": "UK Charities (Open)",
@@ -11389,7 +11389,7 @@
               },
               {
                 "name": "Research Councils Total",
-                "value": 24
+                "value": 20
               }
             ]
           },
@@ -11400,7 +11400,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 178
+                "value": 176
               },
               {
                 "name": "EU Government Bodies",
@@ -11427,7 +11427,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 234
+                "value": 210
               },
               {
                 "name": "Non-EU Charities (Open)",
@@ -11454,7 +11454,7 @@
               },
               {
                 "name": "Research Councils Total",
-                "value": 31
+                "value": 30
               },
               {
                 "name": "UK Charities (Open)",
@@ -11488,7 +11488,7 @@
             "sources": [
               {
                 "name": "Research Councils Total",
-                "value": 89
+                "value": 82
               },
               {
                 "name": "UK Charities (Open)",

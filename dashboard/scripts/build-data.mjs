@@ -212,10 +212,7 @@ function sourceCode(sourceName) {
   return match ? match[1].toLowerCase() : null;
 }
 
-function sourceLabel(sourceName) {
-  const source = cleanCell(sourceName);
-  const code = sourceCode(source);
-
+function sourceLabelFromCode(code) {
   if (!code) {
     return null;
   }
@@ -230,7 +227,7 @@ function sourceLabel(sourceName) {
   }
 
   if (numeric >= 2 && numeric <= 14) {
-    return SOURCE_GROUP_ALIASES[String(numeric)] ?? source.replace(/^\d+[a-z]?\s*/, '');
+    return SOURCE_GROUP_ALIASES[String(numeric)] ?? `Source ${numeric}`;
   }
 
   return null;
@@ -245,11 +242,36 @@ function pushOrAdd(map, key, value) {
   map.set(key, (map.get(key) ?? 0) + value);
 }
 
-function sortedEntries(map) {
-  return [...map.entries()]
-    .map(([name, value]) => ({ name, value }))
+function sortNamedValues(values) {
+  return values
     .filter((item) => item.value > 0)
     .sort((a, b) => b.value - a.value);
+}
+
+function buildResearchSourcesFromCodes(codeTotals) {
+  const entries = [];
+
+  const code1j = codeTotals.get('1j') ?? 0;
+  const code1i = codeTotals.get('1i') ?? 0;
+  const researchCouncilTotal = code1j > 0 ? code1j : code1i;
+  if (researchCouncilTotal > 0) {
+    entries.push({ name: 'Research Councils Total', value: researchCouncilTotal });
+  }
+
+  for (let i = 2; i <= 14; i += 1) {
+    const code = String(i);
+    const value = codeTotals.get(code) ?? 0;
+    if (value <= 0) {
+      continue;
+    }
+
+    entries.push({
+      name: sourceLabelFromCode(code) ?? `Source ${code}`,
+      value
+    });
+  }
+
+  return sortNamedValues(entries);
 }
 
 function createTable1YearRow({ ukprn, provider, financialYearEnd, academicYear }) {
@@ -604,7 +626,7 @@ async function parseTable5() {
 
       if (!byYear.has(academicYear)) {
         byYear.set(academicYear, {
-          researchSources: new Map(),
+          researchSourceCodes: new Map(),
           researchTotal: 0,
           departments: new Map()
         });
@@ -612,7 +634,6 @@ async function parseTable5() {
 
       const bucket = byYear.get(academicYear);
       const code = sourceCode(source);
-      const label = sourceLabel(source);
 
       const isTotalResearchMarker =
         marker.includes('Total research grants and contracts') ||
@@ -621,8 +642,8 @@ async function parseTable5() {
       if (isTotalResearchMarker) {
         if (code === '15') {
           bucket.researchTotal = value;
-        } else if (label) {
-          pushOrAdd(bucket.researchSources, label, value);
+        } else if (code) {
+          pushOrAdd(bucket.researchSourceCodes, code, value);
         }
       }
 
@@ -644,7 +665,7 @@ async function parseTable5() {
           code: deptCode,
           name: deptName,
           total: 0,
-          sources: new Map()
+          sourceCodes: new Map()
         });
       }
 
@@ -655,11 +676,11 @@ async function parseTable5() {
         return;
       }
 
-      if (!label) {
+      if (!code) {
         return;
       }
 
-      pushOrAdd(dept.sources, label, value);
+      pushOrAdd(dept.sourceCodes, code, value);
     });
   }
 
@@ -668,7 +689,7 @@ async function parseTable5() {
 
   for (const year of years) {
     const item = byYear.get(year);
-    const sources = sortedEntries(item.researchSources);
+    const sources = buildResearchSourcesFromCodes(item.researchSourceCodes);
 
     if (item.researchTotal === 0) {
       item.researchTotal = sources.reduce((sum, source) => sum + source.value, 0);
@@ -676,7 +697,7 @@ async function parseTable5() {
 
     const departments = [...item.departments.values()]
       .map((dept) => {
-        const deptSources = sortedEntries(dept.sources);
+        const deptSources = buildResearchSourcesFromCodes(dept.sourceCodes);
         const total = dept.total || deptSources.reduce((sum, source) => sum + source.value, 0);
 
         return {

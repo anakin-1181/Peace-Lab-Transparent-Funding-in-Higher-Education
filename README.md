@@ -23,7 +23,7 @@ It focuses on clear flow visualization, exact source values (no extrapolation), 
 ## 1) Project Repository Breakdown
 
 ```text
-HE_data2/
+
 ├── Data/                      # Local raw CSV source files (gitignored in normal deployment flow)
 ├── dashboard/                 # Frontend app + serverless chat endpoint
 │   ├── api/                   # Vercel serverless API routes (chat backend)

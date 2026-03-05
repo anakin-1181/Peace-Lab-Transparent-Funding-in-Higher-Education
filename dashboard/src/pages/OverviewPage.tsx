@@ -10,11 +10,12 @@ import {
   buildExpenditureBreakdown,
   buildOverviewModel,
   buildResearchSourceBreakdown,
+  buildStaffCostBreakdown,
   buildTuitionBreakdown
 } from '../lib/charts';
 import { formatCurrencyK, pct } from '../lib/format';
 
-type DrilldownKey = 'tuition' | 'research' | 'expenditure' | null;
+type DrilldownKey = 'tuition' | 'research' | 'expenditure' | 'staffCosts' | null;
 
 export function OverviewPage() {
   const { loading, error, data } = useDashboardData();
@@ -44,8 +45,11 @@ export function OverviewPage() {
   const tuition = buildTuitionBreakdown(data, year);
   const research = buildResearchSourceBreakdown(data, year);
   const expenditure = buildExpenditureBreakdown(data, year);
+  const staffCosts = buildStaffCostBreakdown(data, year);
 
   const onChartClick = (name: string) => {
+    const normalizedName = name.toLowerCase();
+
     if (name.includes('Tuition')) {
       setDrilldown('tuition');
       return;
@@ -56,13 +60,17 @@ export function OverviewPage() {
       return;
     }
 
+    if (normalizedName.includes('staff costs')) {
+      setDrilldown('staffCosts');
+      return;
+    }
+
     if (
-      name.includes('expenditure') ||
-      name.includes('Staff costs') ||
-      name.includes('Restructuring') ||
-      name.includes('Depreciation') ||
-      name.includes('Interest') ||
-      name.includes('Other operating')
+      normalizedName.includes('expenditure') ||
+      normalizedName.includes('restructuring') ||
+      normalizedName.includes('depreciation') ||
+      normalizedName.includes('interest') ||
+      normalizedName.includes('other operating')
     ) {
       setDrilldown('expenditure');
     }
@@ -126,6 +134,16 @@ export function OverviewPage() {
             <PieChart title="Table 5: Research Grants by Source" data={research} height={380} />
           ) : (
             <div className="empty-view">No Table 5 research source data for {year}.</div>
+          )}
+        </Modal>
+      ) : null}
+
+      {drilldown === 'staffCosts' ? (
+        <Modal title={`Staff Costs Detail (${year})`} onClose={() => setDrilldown(null)}>
+          {staffCosts.length > 0 ? (
+            <PieChart title="Table 8: Academic vs Other Staff Costs" data={staffCosts} height={380} />
+          ) : (
+            <div className="empty-view">No Table 8 staff cost data for {year}.</div>
           )}
         </Modal>
       ) : null}

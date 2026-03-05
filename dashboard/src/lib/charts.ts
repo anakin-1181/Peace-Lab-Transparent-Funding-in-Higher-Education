@@ -149,6 +149,19 @@ export function buildExpenditureBreakdown(data: DashboardData, year: string): Na
   ].filter((item) => item.value > 0);
 }
 
+export function buildStaffCostBreakdown(data: DashboardData, year: string): NamedValue[] {
+  const t8 = data.table8.byYear[year];
+
+  if (!t8) {
+    return [];
+  }
+
+  return [
+    { name: 'Academic staff costs', value: t8.academicStaffCosts },
+    { name: 'Other staff costs', value: t8.otherStaffCosts }
+  ].filter((item) => item.value > 0);
+}
+
 export function buildDepartmentSankey(
   department: DepartmentBreakdown
 ) {

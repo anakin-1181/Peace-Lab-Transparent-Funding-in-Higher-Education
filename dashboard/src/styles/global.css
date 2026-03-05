@@ -582,6 +582,10 @@ input {
   padding: 0;
 }
 
+.dept-checkbox-grid.collapsed {
+  display: none;
+}
+
 @keyframes spin {
   to {
     transform: rotate(1turn);

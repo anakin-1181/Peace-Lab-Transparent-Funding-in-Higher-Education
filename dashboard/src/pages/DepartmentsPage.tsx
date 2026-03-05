@@ -40,6 +40,7 @@ export function DepartmentsPage() {
   const [year, setYear] = useState('');
   const [departmentKey, setDepartmentKey] = useState('');
   const [visibleDepartments, setVisibleDepartments] = useState<Set<string>>(new Set());
+  const [showDepartmentList, setShowDepartmentList] = useState(true);
   
 
   useEffect(() => {
@@ -184,8 +185,20 @@ export function DepartmentsPage() {
                   Select all
                 </button>
 
-                <button type="button" className="secondary-btn" onClick={() => setVisibleDepartments(new Set())}>
+                <button
+                  type="button"
+                  className="secondary-btn"
+                  onClick={() => setVisibleDepartments(new Set())}
+                >
                   Deselect all
+                </button>
+
+                <button
+                  type="button"
+                  className="secondary-btn"
+                  onClick={() => setShowDepartmentList((v) => !v)}
+                >
+                  {showDepartmentList ? 'Collapse list' : 'Expand list'}
                 </button>
 
                 <span className="dept-count">
@@ -194,7 +207,7 @@ export function DepartmentsPage() {
               </div>
             </div>
 
-            <div className="dept-checkbox-grid">
+            <div className={`dept-checkbox-grid ${showDepartmentList ? '' : 'collapsed'}`}>
               {shareOverTime?.lines.map((line) => (
                 <label key={line.name} className="dept-checkbox">
                   <input
